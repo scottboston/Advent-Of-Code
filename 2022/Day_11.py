@@ -89,7 +89,7 @@ if __name__ == '__main__':
 
     monkeys = [m0, m1, m2, m3, m4, m5, m6, m7]
 
-    for _ in range(10000):
+    for _ in range(20):
         for m in monkeys:
             m.process_round()
 
