@@ -15,8 +15,8 @@ class Monkey:
         self.test_value = test_value
         self.inspect = 0
 
-    def get_bored(self, item):
-        return (item // 3)
+    def get_bored(self, item, part_2 = False):
+        return (item // 3) if not part_2 else int(item) //
 
     def test_item(self, item):
         if item % self.test_value == 0:
@@ -58,6 +58,7 @@ class Monkey:
 
     def set_rfalse(self, m):
         self.rfalse = m
+
 
 
 if __name__ == '__main__':
