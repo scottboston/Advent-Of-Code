@@ -1,8 +1,6 @@
 import aoc_utils.myconfig as utils
 import pandas as pd
 from io import StringIO
-
-
 def part1():
     input_data = utils.get_data(year=2023, day=2)
     df = pd.read_csv(StringIO(input_data), sep=";", header=None, names=range(10))
