@@ -1,6 +1,8 @@
 import aoc_utils.myconfig as utils
 import pandas as pd
 from io import StringIO
+
+
 def part1():
     input_data = utils.get_data(year=2023, day=2)
     df = pd.read_csv(StringIO(input_data), sep=";", header=None, names=range(10))
@@ -19,7 +21,7 @@ def part1():
         axis=1,
     ).all(1)
     df.index = df.index + 1
-    results = sum(df.where(df).dropna().index.to_list())
+    results = sum(df[df].index.to_list())
     return results
 
 
