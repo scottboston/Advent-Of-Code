@@ -13,10 +13,10 @@ def part1():
             e = m.end()
             mm = l[s:e]
             for lc in range(-1, 2):
-                if n + lc >= 0 and n + lc < len(i):
+                if (ln := n + lc) >= 0 and ln < len(i):
                     s = s + 1 if s == 0 else s
                     e = e + 1 if e == len(l) else e
-                    checkstr = i[n + lc][s - 1 : e + 1]
+                    checkstr = i[ln][s - 1 : e + 1]
                     if isinstance(re.search("[^\d.]", checkstr), re.Match):
                         num.append(mm)
                         break
@@ -36,12 +36,12 @@ def part2():
             e = m.end()
             mm = l[s:e]
             for lc in range(-1, 2):
-                if n + lc >= 0 and n + lc < len(i):
+                if (ln := n + lc) >= 0 and ln < len(i):
                     s = s + 1 if s == 0 else s
                     e = e + 1 if e == len(l) else e
                     checkstr = i[n + lc][s - 1 : e + 1]
                     if isinstance(re.search("[*]", checkstr), re.Match):
-                        if num.get(key := f'{n + lc}, {i[n + lc].find("*", s - 1)}'):
+                        if num.get(key := f'{ln}, {i[ln].find("*", s - 1)}'):
                             num[key] *= int(mm)
                             sumkeys[key] += 1
                         else:
