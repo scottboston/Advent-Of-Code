@@ -26,7 +26,28 @@ def part1():
 
 def part2():
     input_data = utils.get_data(year=2023, day=3)
-    results = None
+    i = input_data.split()
+    num = {}
+    sumkeys = {}
+    for n, l in enumerate(i):
+        matches = re.finditer("\d+", l)
+        for m in matches:
+            s = m.start()
+            e = m.end()
+            mm = l[s:e]
+            for lc in range(-1, 2):
+                if n + lc >= 0 and n + lc < len(i):
+                    s = s + 1 if s == 0 else s
+                    e = e + 1 if e == len(l) else e
+                    checkstr = i[n + lc][s - 1 : e + 1]
+                    if isinstance(re.search("[*]", checkstr), re.Match):
+                        if num.get(key := f'{n + lc}, {i[n + lc].find("*", s - 1)}'):
+                            num[key] *= int(mm)
+                            sumkeys[key] += 1
+                        else:
+                            num[key] = int(mm)
+                            sumkeys[key] = 1
+    results = sum(v for k, v in num.items() if sumkeys[k] == 2)
     return results
 
 
