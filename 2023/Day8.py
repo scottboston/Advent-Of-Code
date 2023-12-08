@@ -1,8 +1,6 @@
 import aoc_utils.myconfig as utils
 import pandas as pd
 from io import StringIO
-from collections import Counter
-import numpy as np
 import math
 
 
