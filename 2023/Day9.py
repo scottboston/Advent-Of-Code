@@ -4,7 +4,7 @@ import aoc_utils.myconfig as utils
 from functools import reduce
 
 # Combined part 1 and 2 in to single function
-# Is there a numpy function that can do reduce(lambda x,y y-x, [...]) ?
+# Is there a numpy function that can do reduce(lambda x, y : y-x, [...]) ?
 # Stumbled upon using np.count_nonzero after trying max and sum failing in some cases
 
 
