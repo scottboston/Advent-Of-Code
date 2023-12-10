@@ -8,20 +8,6 @@ from functools import reduce
 # Stumbled upon using np.count_nonzero after trying max and sum failing in some cases
 
 
-def timing(f):
-    @wraps(f)
-    def wrap(*args, **kw):
-        ts = time()
-        result = f(*args, **kw)
-        te = time()
-        print(
-            "func:%r args:[%r, %r] took: %2.10f sec" % (f.__name__, args, kw, te - ts)
-        )
-        return result
-
-    return wrap
-
-
 def combined():
     input_data = utils.get_data(year=2023, day=9)
     p1_total, p2_total = 0, 0
