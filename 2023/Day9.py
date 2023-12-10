@@ -29,7 +29,6 @@ def combined_2():
     a = np.loadtxt(input_data.splitlines())
     first = a[:, 0]
     last = a[:, -1]
-    i = 0
     while np.count_nonzero(a) != 0:
         a = np.diff(a)
         first = np.vstack([first, a[:, 0]])
