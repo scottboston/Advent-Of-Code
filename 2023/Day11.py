@@ -5,7 +5,7 @@ import numpy as np
 from io import StringIO
 
 def part1():
-  input_string = utils.get_data(year=2023, day=11)
+  input_data = utils.get_data(year=2023, day=11)
   df = pd.read_csv(StringIO(input_data), header=None)
   df = df[0].apply(lambda x: pd.Series([*x]))
   dfm = df.mask(df.eq('.'))
@@ -24,7 +24,7 @@ def part1():
   return results
   
 def part2():
-  input_string = utils.get_data(year=2023, day=11)
+  input_data = utils.get_data(year=2023, day=11)
   df = pd.read_csv(StringIO(input_data), header=None)
   df = df[0].apply(lambda x: pd.Series([*x]))
   dfm = df.mask(df.eq('.'))
