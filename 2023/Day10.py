@@ -70,70 +70,51 @@ def part2():
     S = (1, 0)
     E = (0, 1)
     direction = [N, W, S, E]
-    to_pipes = {
-        "F": [S, E],
-        "|": [N, S],
-        "-": [W, E],
-        "J": [N, W],
-        "7": [S, W],
-        "S": [N, W, S, E],
-        "L": [N, E],
-        ".": " ",
-    }
     passages = {
-        "F": {S: E, E: S},
-        "|": {N: S, S: N},
-        "-": {W: E, E: W},
-        "J": {N: W, W: N},
-        "7": {S: W, W: S},
-        "L": {N: E, E: N},
-        ".": {},
+        "F": {N: E, W: S},
+        "|": {N: N, S: S},
+        "-": {E: E, W: W},
+        "J": {S: W, E: N},
+        "7": {N: W, E: S},
+        "L": {S: E, W: N},
+        ".": dict(),
     }
-
-    r, c = np.where(df.ne("."))
-    pipes = dict(enumerate(zip(r, c)))
-    ctop = {v: k for k, v in pipes.items()}
 
     r, c = np.where(df == "S")
-    p = (r[0], c[0])
-
+    loc0 = (r[0], c[0])
+    loc0
     G = nx.Graph()
 
-    run = True
+    complete_loop = False
     for d in direction:
-        o = p[0] + d[0], p[1] + d[1]
-        print(o, df.loc[o], passages[df.loc[o]], d, tuple(map(np.negative, (d))))
+        o = loc0
+        p = o[0] + d[0], o[1] + d[1]
         try:
-            while run:
-                d = passages[df.loc[o]][tuple(map(np.negative, (d)))]
-                # print(f'Adding Edge {ctop[o]} - {ctop[p]}')
-                G.add_edge(ctop[o], ctop[p])
-                p = o
-                o = p[0] + d[0], p[1] + d[1]
-                if p == (r[0], p[0]):
-                    run = False
-        except KeyError:
+            while not complete_loop:
+                d = passages[df.loc[p]][d]
+
+                G.add_edge(o, p)
+                o, p = p, (p[0] + d[0], p[1] + d[1])
+                if p == loc0:
+                    print("Found a loop")
+                    complete_loop = True
+        except KeyError as e:
             print("blocked")
             continue
 
-    polygon_data = {
-        "ID": [1],
-        "geometry": Polygon([Point(x, y) for x, y in [pipes[p] for p in G.nodes]]),
-    }
+    polygon_data = {"ID": [1], "geometry": Polygon([Point(y, x) for x, y in G.nodes])}
     polygon_gdf = gpd.GeoDataFrame(polygon_data, geometry="geometry")
 
     r, c = np.where(df)
-    points_data = {"geometry": [Point(x, y) for x, y in zip(r, c)]}
+    points_data = {"geometry": [Point(y, x) for x, y in zip(r, c)]}
     points_gdf = gpd.GeoDataFrame(points_data, geometry="geometry")
 
     p_inside = gpd.sjoin(points_gdf, polygon_gdf, how="inner", predicate="within")
+
     results = p_inside.shape[0]
-
-    # Returning incorrect number four short of actual number
-
     return results
 
 
 if __name__ == "__main__":
     print(f"{part1()=}")
-    print(f"{part2()=}")  # Not correct
+    print(f"{part2()=}")
