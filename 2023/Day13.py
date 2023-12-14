@@ -110,3 +110,8 @@ def part2():
 if __name__ == "__main__":
     print(f"{part1()=}")
     print(f"{part2()=}")
+
+    # Explanation
+    # Find identical row/column back to back, then fold the array using split and flip half to compare
+    # Part 2 find row/column with one difference or identical fold the array using split and flip then
+    # check to see if you have one difference summing the inequality check
