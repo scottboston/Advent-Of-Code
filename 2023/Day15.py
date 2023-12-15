@@ -14,12 +14,12 @@ def get_word_value(word: str):
     return hvalue
 
 def part1():
-  input_data = utils.get_data(year=2023, day=15)
+  input_data = utils.get_data(year=2023, day=15)[:-1]
   results = sum(map(get_word_value, input_data.split(',')))
   return results
   
 def part2():
-  input_data = utils.get_data(year=2023, day=15)
+  input_data = utils.get_data(year=2023, day=15)[:-1]
 
   box = {key: {} for key in range(256)}
 
