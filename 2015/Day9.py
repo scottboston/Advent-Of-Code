@@ -12,12 +12,17 @@ def part1():
         t_city, weight = t_city_weight.split(" = ")
         G.add_edge(f_city, t_city, weight=int(weight))
 
-    results = min(
+    results_part1 = min(
         nx.path_weight(G, p, "weight")
         for p in list(permutations(G.nodes, len(G.nodes)))
     )
-    return results
+
+    results_part2 = max(
+        nx.path_weight(G, p, "weight")
+        for p in list(permutations(G.nodes, len(G.nodes)))
+    )
+    return (results_part1, results_part2)
 
 
 if __name__ == "__main__":
-    print(f"{part1()=}")
+    print(f"Part 1 and Part2 : {part1()}")
