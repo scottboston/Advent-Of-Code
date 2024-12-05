@@ -51,7 +51,6 @@ def part2():
     df_check = pd.DataFrame([[*'M.S'],
                              [*'.A.'],
                              [*'M.S']])
-
     r_df, c_df = df.shape
     result = 0
     for r in range(r_df):
@@ -68,5 +67,5 @@ def part2():
 
 
 if __name__ == '__main__':
-    # print(f'{part1()=}')
+    print(f'{part1()=}')
     print(f'{part2()=}')
