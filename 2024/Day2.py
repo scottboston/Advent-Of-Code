@@ -1,7 +1,7 @@
-from io import StringIO
 import pandas as pd
 import numpy as np
 import aoc_utils.myconfig as utils
+from itertools import combinations
 
 input_data = """7 6 4 2 1
 1 2 7 8 9
@@ -12,13 +12,38 @@ input_data = """7 6 4 2 1
 
 input_data = utils.get_data(2024, 2)
 
+
 def part1():
-    a = np.array([l.split() for l in input_data.splitlines()])
-    df = pd.DataFrame(a)
-    df_t = df.T
-    df_t_diff = df_t.diff()
-    result = df_t_diff[1:].apply(lambda x: (abs(np.sign(x).sum()) == 4) & (abs(x) <= 3)).all().sum()
+    result = 0
+    for l in input_data.splitlines():
+        s = pd.Series(l.split())
+        s = s.astype(int)
+        s_diff = s.diff()
+        x = s_diff[1:]
+        result += ((abs(np.sign(x).sum()) == len(x)) & (abs(x) <= 3)).all()
     return result
 
-if __name__ == '__main__':
-    print(f'{part1()=}')
+
+def part2():
+    result = 0
+    for l in input_data.splitlines():
+        s = pd.Series(l.split())
+        s = s.astype(int)
+        s_diff = s.diff()
+        x = s_diff[1:]
+        if ((abs(np.sign(x).sum()) == len(x)) & (abs(x) <= 3)).all():
+            result += 1
+        else:
+            for c in list(combinations(s.index, len(s) - 1)):
+                sub_s = s[list(c)]
+                s_diff = sub_s.diff()
+                x = s_diff[1:]
+                if ((abs(np.sign(x).sum()) == len(x)) & (abs(x) <= 3)).all():
+                    result += 1
+                    break
+    return result
+
+
+if __name__ == "__main__":
+    print(f"{part1()=}")
+    print(f"{part2()=}")
