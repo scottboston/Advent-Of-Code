@@ -14,7 +14,6 @@ def part1():
 
 
 def part2():
-    print(input_data)
     pat = "(do(?:n't)?)|mul\((\d+),(\d+)\)"
     match = re.findall(pat, input_data)
     df = pd.DataFrame(match, columns=["include", "i", "j"])
@@ -33,5 +32,5 @@ def part2():
 
 
 if __name__ == "__main__":
-    # print(f"{part1()=}")
+    print(f"{part1()=}")
     print(f"{part2()=}")
