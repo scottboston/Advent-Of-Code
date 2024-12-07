@@ -20,7 +20,7 @@ def part1_and_part2():
             part1_mid.append(pages[len(pages) // 2])
         else:
             g = G.subgraph(pages)
-            pages = list(filter(lambda page: page in pages, nx.topological_sort(g)))
+            pages = list(nx.topological_sort(g))
             part2_mid.append(pages[len(pages) // 2])
     return sum(map(int, part1_mid)), sum(map(int, part2_mid))
 
