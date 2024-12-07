@@ -92,5 +92,5 @@ def part2():
 
 
 if __name__ == "__main__":
-    # print(f'{part1()}')
+    print(f"{part1()}")
     print(f"{part2()}")
