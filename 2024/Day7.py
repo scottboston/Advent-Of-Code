@@ -1,7 +1,4 @@
 import aoc_utils.myconfig as utils
-import pandas as pd
-import numpy as np
-from itertools import pairwise
 from itertools import product
 import operator
 
@@ -31,7 +28,6 @@ def mul_int(a, b):
 
 
 operations = [operator.add, operator.mul]
-
 operations_p2 = [add_int, mul_int, add_string]
 
 
@@ -61,17 +57,13 @@ def eval_func(equation):
 def interleave_lists(list1, list2):
     result = []
     min_length = min(len(list1), len(list2))
-
     for i in range(min_length):
         result.append(list1[i])
         result.append(list2[i])
-
-    # Append remaining elements from the longer list
     if len(list1) > min_length:
         result.extend(list1[min_length:])
     elif len(list2) > min_length:
         result.extend(list2[min_length:])
-
     return result
 
 
