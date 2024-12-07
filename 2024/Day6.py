@@ -88,16 +88,6 @@ def part2():
     turn = 0
     dir = direction[turn]
 
-    # df.loc[r+dir[0], c+dir[1]] = '#'
-    guard_loop = 0
-    # for i,_ in df.stack().items():
-    #     rb = i[0]
-    #     cb = i[1]
-    #     df_try = df.copy()
-    #     df_try.loc[rb, cb] = '#'
-    #     guard_loop += run_guard(df_try, r, c, dir, turn)
-
-    data = df.stack().index.to_list()
     l_dfs = []
     _, dfin = part1()
     ri, ci = np.where(dfin.isin(dir_sym))
