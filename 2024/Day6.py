@@ -1,7 +1,7 @@
 import aoc_utils.myconfig as utils
 import pandas as pd
 import numpy as np
-from joblib import Parallel, delayed
+import pypeln as pl
 from functools import partial
 from tqdm import tqdm
 
@@ -97,7 +97,9 @@ def part2():
         df_in.loc[i[0], i[1]] = "#"
         l_dfs.append(df_in)
     pfunc = partial(run_guard, r, c, dir, turn)
-    runs = Parallel(n_jobs=-1)(delayed(pfunc)(df_input) for df_input in tqdm(l_dfs))
+    runs = pl.process.map(pfunc, l_dfs)
+    for _ in tqdm(runs, total=len(l_dfs)):
+        pass
     guard_loop = sum(runs)
 
     # guard_loop += run_guard(df, r, c, dir, turn)
@@ -118,5 +120,5 @@ def run_guard(r, c, dir, turn, df):
 
 
 if __name__ == "__main__":
-    print(f"{part1()=}")
+    print(f"{part1()[0]=}")
     print(f"{part2()=}")
