@@ -37,25 +37,25 @@ def part1():
         for point_a, point_b in list(combinations(points, 2)):
             diff_r = point_a[0] - point_b[0]
             diff_c = point_a[1] - point_b[1]
+            new_a_r = new_a_r
+            new_a_c = new_a_c
+            new_b_r = new_b_r
+            new_b_c = new_b_c
 
-            df_sub.loc[point_a[0] + diff_r, point_a[1] + diff_c] = "#"
-            df_sub.loc[point_b[0] - diff_r, point_b[1] - diff_c] = "#"
-            # print(df_sub.reindex_like(df))
             if (
-                point_a[0] + diff_r >= 0
-                and point_a[0] + diff_r < len(df)
-                and point_a[1] + diff_c >= 0
-                and point_a[1] + diff_c < len(df)
+                new_a_r >= 0
+                and new_a_r < len(df)
+                and new_a_c >= 0
+                and new_a_c < len(df)
             ):
-                list_of_antinode.append((point_a[0] + diff_r, point_a[1] + diff_c))
+                list_of_antinode.append((new_a_r, new_a_c))
             if (
-                point_b[0] - diff_r >= 0
-                and point_b[0] - diff_r < len(df)
-                and point_b[1] - diff_c >= 0
-                and point_b[1] - diff_c < len(df)
+                new_b_r >= 0
+                and new_b_r < len(df)
+                and new_b_c >= 0
+                and new_b_c < len(df)
             ):
-                list_of_antinode.append((point_b[0] - diff_r, point_b[1] - diff_c))
-            # print(list_of_antinode)
+                list_of_antinode.append((new_b_r, new_b_c))
     result = len(set(list_of_antinode))
     return result
 
