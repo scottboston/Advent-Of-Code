@@ -37,10 +37,11 @@ def part1():
         for point_a, point_b in list(combinations(points, 2)):
             diff_r = point_a[0] - point_b[0]
             diff_c = point_a[1] - point_b[1]
-            new_a_r = new_a_r
-            new_a_c = new_a_c
-            new_b_r = new_b_r
-            new_b_c = new_b_c
+
+            new_a_r = point_a[0] + diff_r
+            new_a_c = point_a[1] + diff_c
+            new_b_r = point_b[0] - diff_r
+            new_b_c = point_b[1] - diff_c
 
             if (
                 new_a_r >= 0
@@ -77,41 +78,39 @@ def part2():
             point_a_harmonic = 1
             point_b_harmonic = 1
             while (
-                point_a[0] + (diff_r * point_a_harmonic) >= 0
-                and point_a[0] + (diff_r * point_a_harmonic) < len(df)
-                and point_a[1] + (diff_c * point_a_harmonic) >= 0
-                and point_a[1] + (diff_c * point_a_harmonic) < len(df)
+                point_a[0] + (diff_r_harmonic := (diff_r * point_a_harmonic)) >= 0
+                and point_a[0] + diff_r_harmonic < len(df)
+                and point_a[1] + (diff_c_harmonic := (diff_c * point_a_harmonic)) >= 0
+                and point_a[1] + diff_c_harmonic < len(df)
             ):
                 df_sub.loc[
-                    point_a[0] + (diff_r * point_a_harmonic),
-                    point_a[1] + (diff_c * point_a_harmonic),
+                    point_a[0] + diff_r_harmonic,
+                    point_a[1] + diff_c_harmonic,
                 ] = "#"
                 list_of_antinode.append(
                     (
-                        point_a[0] + (diff_r * point_a_harmonic),
-                        point_a[1] + (diff_c * point_a_harmonic),
+                        point_a[0] + diff_r_harmonic,
+                        point_a[1] + diff_c_harmonic,
                     )
                 )
                 point_a_harmonic += 1
             while (
-                point_b[0] - (diff_r * point_b_harmonic) >= 0
-                and point_b[0] - (diff_r * point_b_harmonic) < len(df)
-                and point_b[1] - (diff_c * point_b_harmonic) >= 0
-                and point_b[1] - (diff_c * point_b_harmonic) < len(df)
+                point_b[0] - (diff_r_harmonic := (diff_r * point_b_harmonic)) >= 0
+                and point_b[0] - diff_r_harmonic < len(df)
+                and point_b[1] - (diff_c_harmonic := (diff_c * point_b_harmonic)) >= 0
+                and point_b[1] - diff_c_harmonic < len(df)
             ):
                 df_sub.loc[
-                    point_b[0] - (diff_r * point_b_harmonic),
-                    point_b[1] - (diff_c * point_b_harmonic),
+                    point_b[0] - diff_r_harmonic,
+                    point_b[1] - diff_c_harmonic,
                 ] = "#"
                 list_of_antinode.append(
                     (
-                        point_b[0] - (diff_r * point_b_harmonic),
-                        point_b[1] - (diff_c * point_b_harmonic),
+                        point_b[0] - diff_r_harmonic,
+                        point_b[1] - diff_c_harmonic,
                     )
                 )
                 point_b_harmonic += 1
-            # print(df_sub.reindex_like(df))
-            # print(list_of_antinode)
     result = len(set(list_of_antinode))
     return result
 
