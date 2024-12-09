@@ -78,36 +78,28 @@ def part2():
             point_a_harmonic = 1
             point_b_harmonic = 1
             while (
-                point_a[0] + (diff_r_harmonic := (diff_r * point_a_harmonic)) >= 0
-                and point_a[0] + diff_r_harmonic < len(df)
-                and point_a[1] + (diff_c_harmonic := (diff_c * point_a_harmonic)) >= 0
-                and point_a[1] + diff_c_harmonic < len(df)
+                (new_a_r := point_a[0] + (diff_r * point_a_harmonic)) >= 0
+                and new_a_r < len(df)
+                and (new_a_c := point_a[1] + (diff_c * point_a_harmonic)) >= 0
+                and new_a_c < len(df)
             ):
-                df_sub.loc[
-                    point_a[0] + diff_r_harmonic,
-                    point_a[1] + diff_c_harmonic,
-                ] = "#"
                 list_of_antinode.append(
                     (
-                        point_a[0] + diff_r_harmonic,
-                        point_a[1] + diff_c_harmonic,
+                        new_a_r,
+                        new_a_c,
                     )
                 )
                 point_a_harmonic += 1
             while (
-                point_b[0] - (diff_r_harmonic := (diff_r * point_b_harmonic)) >= 0
-                and point_b[0] - diff_r_harmonic < len(df)
-                and point_b[1] - (diff_c_harmonic := (diff_c * point_b_harmonic)) >= 0
-                and point_b[1] - diff_c_harmonic < len(df)
+                (new_b_r := point_b[0] - (diff_r * point_b_harmonic)) >= 0
+                and new_b_r < len(df)
+                and (new_b_c := point_b[1] - (diff_c * point_b_harmonic)) >= 0
+                and new_b_c < len(df)
             ):
-                df_sub.loc[
-                    point_b[0] - diff_r_harmonic,
-                    point_b[1] - diff_c_harmonic,
-                ] = "#"
                 list_of_antinode.append(
                     (
-                        point_b[0] - diff_r_harmonic,
-                        point_b[1] - diff_c_harmonic,
+                        new_b_r,
+                        new_b_c,
                     )
                 )
                 point_b_harmonic += 1
