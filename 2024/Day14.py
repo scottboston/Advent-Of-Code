@@ -47,7 +47,10 @@ def part1():
 
 
 def part2():
-    """After reading blog post about, I used where max value equals to 1, indicating all robots are in a unique position"""
+    """After reading blogs post about this problem,
+    I used where max value equals to 1,
+    indicating all robots are in a unique position
+    which finds the easter egg."""
     get_data = get_input_data(False).strip("\n").splitlines()
     sec = 7773  # Jump start solution to my known value but could start at 0 seconds.
     while True:
