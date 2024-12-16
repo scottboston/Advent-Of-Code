@@ -47,7 +47,7 @@ def part1():
 
 
 def part2():
-    """After reading blogs post about this problem,
+    """After reading blog posts about this problem,
     I used where max value equals to 1,
     indicating all robots are in a unique position
     which finds the easter egg."""
