@@ -47,8 +47,9 @@ def part1():
 
 
 def part2():
+    """After reading blog post about, I used where max value equals to 1, indicating all robots are in a unique position"""
     get_data = get_input_data(False).strip("\n").splitlines()
-    sec = 7773
+    sec = 7773  # Jump start solution to my known value but could start at 0 seconds.
     while True:
         sec += 1
         print(f"{sec=}")
