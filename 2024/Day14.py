@@ -26,7 +26,7 @@ p=9,5 v=-3,-3"""
 
 
 def part1():
-    sec = 100
+    sec = 257
     c_size = 101
     r_size = 103
     df = pd.DataFrame(
@@ -47,21 +47,27 @@ def part1():
 
 
 def part2():
-    sec = 0
-    # while True:
-    #     sec += 1
-    #     c_size = 101
-    #     r_size = 103
-    #     df = pd.DataFrame(np.zeros((r_size, c_size)), index=range(r_size), columns=range(c_size))
-    #     pat = "p=(?P<c>\d+),(?P<r>\d+) v=(?P<dc>-?\d+),(?P<dr>-?\d+)"
-    #     for l in get_input_data(False).strip('\n').splitlines():
-    #         m = re.findall(pat, l)
-    #         print(m)
-    #         c, r, dc, dr = map(int, m[0])
-    #         c_final = (c + (dc * sec)) % c_size
-    #         r_final = (r + (dr * sec)) % r_size
-    #         df.loc[r_final, c_final] += 1
-    #     print(df.astype(int))
+    get_data = get_input_data(False).strip("\n").splitlines()
+    sec = 7773
+    while True:
+        sec += 1
+        print(f"{sec=}")
+        c_size = 101
+        r_size = 103
+        df = pd.DataFrame(
+            np.zeros((r_size, c_size)), index=range(r_size), columns=range(c_size)
+        )
+        pat = "p=(?P<c>\d+),(?P<r>\d+) v=(?P<dc>-?\d+),(?P<dr>-?\d+)"
+        for l in get_data:
+            m = re.findall(pat, l)
+            c, r, dc, dr = map(int, m[0])
+            c_final = (c + (dc * sec)) % c_size
+            r_final = (r + (dr * sec)) % r_size
+            df.loc[r_final, c_final] += 1
+        if np.max(df.to_numpy()) == 1:
+            break
+    print(sec)
+    print(df)
     return "What??!?!?!?!?"
 
 
