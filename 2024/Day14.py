@@ -66,9 +66,7 @@ def part2():
             df.loc[r_final, c_final] += 1
         if np.max(df.to_numpy()) == 1:
             break
-    print(sec)
-    print(df)
-    return "What??!?!?!?!?"
+    return sec
 
 
 if __name__ == "__main__":
