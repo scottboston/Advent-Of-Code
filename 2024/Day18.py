@@ -65,5 +65,43 @@ def part1():
     return result
 
 
+def part2():
+    df = pd.DataFrame(np.ones((71, 71)))
+    blockers = get_input_data(False).strip("\n").splitlines()
+    for e in blockers[:1024]:
+        c, r = map(int, e.split(","))
+        df.iloc[r, c] = 0
+    G = nx.Graph()
+
+    r, c = np.where((df == 1.0) & (df.shift() == 1.0))
+    for i in zip(r, c):
+        G.add_edge((i[0] - 1, i[1]), (i[0], i[1]))
+
+    r, c = np.where((df == 1.0) & (df.shift(-1) == 1.0))
+    for i in zip(r, c):
+        G.add_edge((i[0] + 1, i[1]), (i[0], i[1]))
+
+    r, c = np.where((df == 1.0) & (df.shift(-1, axis=1) == 1.0))
+    for i in zip(r, c):
+        G.add_edge((i[0], i[1] + 1), (i[0], i[1]))
+
+    r, c = np.where((df == 1.0) & (df.shift(axis=1) == 1.0))
+    for i in zip(r, c):
+        G.add_edge((i[0], i[1] - 1), (i[0], i[1]))
+
+    remaining_blockers = blockers[1024:]
+    while remaining_blockers:
+        c, r = map(int, remaining_blockers.pop(0).split(","))
+        if (r, c) in G.nodes:
+            G.remove_node((r, c))
+        try:
+            path = nx.shortest_path(G, (0, 0), (70, 70))
+        except nx.NetworkXNoPath:
+            result = c, r
+            break
+    return result
+
+
 if __name__ == "__main__":
     print(f"{part1()=}")
+    print(f"{part2()=}")
