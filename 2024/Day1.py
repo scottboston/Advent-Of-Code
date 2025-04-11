@@ -4,7 +4,7 @@ import aoc_utils.myconfig as utils
 
 def part1():
     input = utils.get_data(2024, 1)
-    df = pd.read_csv(StringIO(input), sep='\s+', header=None)
+    df = pd.read_csv(StringIO(input), sep=r'\s+', header=None)
     df.columns = ['x', 'y']
 
     df['X'] = df['x'].sort_values().to_numpy()
@@ -16,7 +16,7 @@ def part1():
 
 def part2():
     input = utils.get_data(2024, 1)
-    df = pd.read_csv(StringIO(input), sep='\s+', header=None)
+    df = pd.read_csv(StringIO(input), sep=r'\s+', header=None)
     df.columns = ['x', 'y']
 
     vc = df['y'].value_counts()
