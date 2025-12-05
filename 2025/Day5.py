@@ -16,28 +16,30 @@ input_data = """3-5
 
 input_data = utils.get_data(2025, 5)
 
+
 def part1():
-    ranges= []
-    foods= []
+    ranges = []
+    foods = []
     for l in input_data.splitlines():
-        if '-' in l:
-            ranges.append(list(map(int, l.split('-'))))
-        elif l == '':
+        if "-" in l:
+            ranges.append(list(map(int, l.split("-"))))
+        elif l == "":
             continue
         else:
             foods.append(int(l))
     fresh_count = 0
     for i in foods:
-        fresh_count += any(i in range(fresh[0], fresh[1]+1) for fresh in ranges)
+        fresh_count += any(i in range(fresh[0], fresh[1] + 1) for fresh in ranges)
 
     return fresh_count
+
 
 def part2():
     ranges = []
     for l in input_data.splitlines():
-        if '-' in l:
-            ranges.append(list(map(int, l.split('-'))))
-        elif l == '':
+        if "-" in l:
+            ranges.append(list(map(int, l.split("-"))))
+        elif l == "":
             break
     sortedranges = sorted(ranges, key=lambda x: x[0])
     ingredients = 0
@@ -51,6 +53,7 @@ def part2():
             max_seen = r[1]
     return ingredients
 
+
 if __name__ == "__main__":
-    print(f'Part 1: {part1()}')
-    print(f'Part 2: {part2()}')
+    print(f"Part 1: {part1()}")
+    print(f"Part 2: {part2()}")
