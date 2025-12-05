@@ -14,10 +14,14 @@ input_data = """3-5
 17
 32"""
 
-input_data = utils.get_data(2025, 5)
+input_data = utils.get_data(2025,
+                            5)
 
 
 def part1():
+
+
+
     ranges = []
     foods = []
     for l in input_data.splitlines():
