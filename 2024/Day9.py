@@ -36,17 +36,17 @@ def part2():
     files = np.repeat(files, repeats)
     i_dot = np.where(files == ".")[0]
     rev_files = files[files != "."][::-1]
-    i_dots = np.where(files[:-1] != files[1:])[0][:-1]+1
+    i_dots = np.where(files[:-1] != files[1:])[0][:-1] + 1
     grp = np.split(files, i_dots)
-    blanks = list(zip(i_dots[::2],np.diff(i_dots)[::2]))
+    blanks = list(zip(i_dots[::2], np.diff(i_dots)[::2]))
     for u, c in list(zip(*np.unique(rev_files, return_counts=True)))[::-1]:
         for n, b in enumerate(blanks):
             if c <= b[1]:
-                files[files==u] = '.'
-                files[b[0]:b[0]+c] = [u]*c
-                blanks[n] = (b[0]+c,b[1]-c)
+                files[files == u] = "."
+                files[b[0] : b[0] + c] = [u] * c
+                blanks[n] = (b[0] + c, b[1] - c)
                 break
-    files[files == '.'] = '0'
+    files[files == "."] = "0"
     files = files.astype(np.int64)
     result = np.sum(files * np.arange(len(files)))
     return result

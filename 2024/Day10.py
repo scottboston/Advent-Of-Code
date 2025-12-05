@@ -68,7 +68,7 @@ def part1():
 
 
 def part2():
-    return 'See Part I'
+    return "See Part I"
 
 
 if __name__ == "__main__":

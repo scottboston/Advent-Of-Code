@@ -10,6 +10,7 @@ def get_input_data(testdata: bool = True) -> str:
     else:
         return utils.get_data(2024, 14)
 
+
 def part1():
     sec = 257
     c_size = 101
@@ -29,6 +30,7 @@ def part1():
     q3 = df.loc[df.shape[0] // 2 + 1 :, : df.shape[1] // 2 - 1].sum().sum()
     q4 = df.loc[df.shape[0] // 2 + 1 :, df.shape[1] // 2 + 1 :].sum().sum()
     return q1 * q2 * q3 * q4
+
 
 def part2():
     """After reading blog posts about this problem,

@@ -3,16 +3,13 @@ from itertools import permutations
 import aoc_utils.myconfig as utils
 
 
-
-
-
 def part1():
     operations = {}
     results = {}
     input_data = utils.get_data(year=2015, day=7)
     for command in input_data.splitlines():
-        operation, result = command.split(' -> ')
-        operations[result] = operation.split(' ')
+        operation, result = command.split(" -> ")
+        operations[result] = operation.split(" ")
 
     def eval_operation(expression):
         try:
@@ -31,28 +28,33 @@ def part1():
                 elif op == "OR":
                     result = eval_operation(operation[0]) | eval_operation(operation[2])
                 elif op == "NOT":
-                    result = ~eval_operation(operation[1]) & 0xffff
+                    result = ~eval_operation(operation[1]) & 0xFFFF
                 elif op == "RSHIFT":
-                    result = eval_operation(operation[0]) >> eval_operation(operation[2])
+                    result = eval_operation(operation[0]) >> eval_operation(
+                        operation[2]
+                    )
                 elif op == "LSHIFT":
-                    result = eval_operation(operation[0]) << eval_operation(operation[2])
+                    result = eval_operation(operation[0]) << eval_operation(
+                        operation[2]
+                    )
                 else:
-                    print('oopsy')
+                    print("oopsy")
             results[expression] = result
         return results[expression]
 
-    return eval_operation('a')
+    return eval_operation("a")
+
 
 def part2():
     operations = {}
     results = {}
     input_data = utils.get_data(year=2015, day=7)
     for command in input_data.splitlines():
-        operation, result = command.split(' -> ')
-        operations[result] = operation.split(' ')
+        operation, result = command.split(" -> ")
+        operations[result] = operation.split(" ")
 
-    #Override
-    operations['b'] = [part1()]
+    # Override
+    operations["b"] = [part1()]
 
     def eval_operation(expression):
         try:
@@ -71,17 +73,21 @@ def part2():
                 elif op == "OR":
                     result = eval_operation(operation[0]) | eval_operation(operation[2])
                 elif op == "NOT":
-                    result = ~eval_operation(operation[1]) & 0xffff
+                    result = ~eval_operation(operation[1]) & 0xFFFF
                 elif op == "RSHIFT":
-                    result = eval_operation(operation[0]) >> eval_operation(operation[2])
+                    result = eval_operation(operation[0]) >> eval_operation(
+                        operation[2]
+                    )
                 elif op == "LSHIFT":
-                    result = eval_operation(operation[0]) << eval_operation(operation[2])
+                    result = eval_operation(operation[0]) << eval_operation(
+                        operation[2]
+                    )
                 else:
-                    print('oopsy')
+                    print("oopsy")
             results[expression] = result
         return results[expression]
 
-    return eval_operation('a')
+    return eval_operation("a")
 
 
 if __name__ == "__main__":

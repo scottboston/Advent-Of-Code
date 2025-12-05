@@ -28,6 +28,7 @@ def part1():
             zeros += 1
     return zeros
 
+
 def part2():
     zeros = 0
     dial = 50
@@ -35,15 +36,15 @@ def part2():
         clicks = int(l[1:])
         if l[0] == "L":
             m = -1
-            for i in range(1,clicks+1):
+            for i in range(1, clicks + 1):
                 if ((dial - i) % 100) == 0:
                     zeros += 1
         if l[0] == "R":
             m = 1
-            for i in range(1,clicks+1):
+            for i in range(1, clicks + 1):
                 if ((dial + i) % 100) == 0:
                     zeros += 1
-        dial += clicks*m
+        dial += clicks * m
         dial %= 100
     return zeros
 

@@ -66,36 +66,42 @@ x02 OR y02 -> z02"""
 # tnw OR pbm -> gnj"""
 
 
-
 def get_input_data(testdata: bool = True) -> str:
     if testdata:
         return input_data
     else:
         return utils.get_data(2024, 24)
 
-values = [l.split(': ') for l in get_input_data(False).splitlines() if ':' in l]
-gates = [l.split(' -> ') for l in get_input_data(False).splitlines() if '->' in l]
-d_values = {k:int(v) for k, v in values}
+
+values = [l.split(": ") for l in get_input_data(False).splitlines() if ":" in l]
+gates = [l.split(" -> ") for l in get_input_data(False).splitlines() if "->" in l]
+d_values = {k: int(v) for k, v in values}
+
 
 def part1():
     for g in gates:
         d_values[g[1]] = g[0]
-    result = [evaluate(left) for left,right in reversed(sorted(gates, key=lambda x: x[-1][-2:])) if right[0] == 'z']
-    return int(''.join(map(str, result)), 2)
+    result = [
+        evaluate(left)
+        for left, right in reversed(sorted(gates, key=lambda x: x[-1][-2:]))
+        if right[0] == "z"
+    ]
+    return int("".join(map(str, result)), 2)
+
 
 def evaluate(eq):
-    if eq in [0,1]:
+    if eq in [0, 1]:
         return eq
-    if ' ' not in eq:
+    if " " not in eq:
         return evaluate(d_values[eq])
-    op1, operator, op2 = eq.split(' ')
-    if operator == 'AND':
+    op1, operator, op2 = eq.split(" ")
+    if operator == "AND":
         return evaluate(op1) & evaluate(op2)
-    elif operator == 'OR':
+    elif operator == "OR":
         return evaluate(op1) | evaluate(op2)
     else:
         return evaluate(op1) ^ evaluate(op2)
 
 
-if __name__ == '__main__':
-    print(f'{part1()=}')
+if __name__ == "__main__":
+    print(f"{part1()=}")
