@@ -2,8 +2,6 @@ import aoc_utils.myconfig as utils
 import numpy as np
 import pandas as pd
 
-input_data = utils.get_data(2025, 6)
-
 input_data = """123 32  51 64 
  45 64  387 23 
   6 988  215 314
@@ -42,7 +40,7 @@ def part2():
             return np.sum(s.iloc[:, 0])
 
     df = pd.concat([df_problem_numbers, problems, mathfuncs], axis=1)
-    result = df.groupby(problems).apply(columnmath).astype(float)
+    result = df.groupby(problems).apply(columnmath).astype(int)
     return result.sum()
 
 
