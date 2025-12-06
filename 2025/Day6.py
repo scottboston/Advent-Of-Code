@@ -40,7 +40,7 @@ def part2():
             return np.sum(s.iloc[:, 0])
 
     df = pd.concat([df_problem_numbers, problems, mathfuncs], axis=1)
-    result = df.groupby(problems).apply(columnmath).astype(int)
+    result = df.groupby(problems).apply(columnmath)
     return result.sum()
 
 
