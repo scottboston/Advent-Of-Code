@@ -46,7 +46,7 @@ def part1(step=2):
     return len(sr) - missed + 1
 
 
-def part2(step=2):
+def part2():
     arr = np.array([[*l] for l in input_data.splitlines()])
     sr, sc = np.where((arr == "^"))
     l = defaultdict(int)
