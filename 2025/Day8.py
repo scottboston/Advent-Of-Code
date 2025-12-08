@@ -27,39 +27,39 @@ input_data = """162,817,812
 
 input_data = utils.get_data(2025, 8)
 
+
 def get_distance(c1, c2):
-    return math.sqrt((c1[0] - c2[0])**2 + (c1[1] - c2[1])**2 + (c1[2] - c2[2])**2)
+    return math.sqrt((c1[0] - c2[0]) ** 2 + (c1[1] - c2[1]) ** 2 + (c1[2] - c2[2]) ** 2)
 
 
 def part1():
     G = nx.Graph()
     circuits = []
     for line in input_data.splitlines():
-        circuits.append(re.findall(r'(\d+),(\d+),(\d+)', line)[0])
+        circuits.append(re.findall(r"(\d+),(\d+),(\d+)", line)[0])
     circuits = [tuple(map(int, e)) for e in circuits]
     matches = sorted([(a, b) for a, b in combinations(circuits, 2)], key=lambda x: get_distance(*x))[:1000]
     for connection in matches:
-        # print(connection)
         G.add_edge(*connection)
-        # print(G.nodes)
     ccs = [len(c) for c in sorted(nx.connected_components(G), key=len, reverse=True)][:3]
     return math.prod(ccs)
+
 
 def part2():
     G = nx.Graph()
     circuits = []
     for line in input_data.splitlines():
-        circuits.append(re.findall(r'(\d+),(\d+),(\d+)', line)[0])
+        circuits.append(re.findall(r"(\d+),(\d+),(\d+)", line)[0])
     circuits = [tuple(map(int, e)) for e in circuits]
     matches = sorted([(a, b) for a, b in combinations(circuits, 2)], key=lambda x: get_distance(*x))
     i = 0
     while len(G.nodes) < len(circuits):
         G.add_edge(*matches[i])
         i += 1
-    last_connection = matches[i-1]
-    return last_connection[0][0]*last_connection[1][0]
+    last_connection = matches[i - 1]
+    return last_connection[0][0] * last_connection[1][0]
 
 
 if __name__ == "__main__":
-    print(f'Part 1: {part1()}')
-    print(f'Part 2: {part2()}')
+    print(f"Part 1: {part1()}")
+    print(f"Part 2: {part2()}")

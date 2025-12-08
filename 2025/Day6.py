@@ -29,9 +29,7 @@ def part2():
     problems = df_problems_T.iloc[:, 0].ne(" ").cumsum()
     mathfuncs = df_problems_T.iloc[:, 0].replace(" ", np.nan).ffill()
     df_problems_T_R = df_problems_T.iloc[:, 1:].iloc[:, ::-1]
-    df_problem_numbers = (
-        df_problems_T_R.sum(axis=1).str.strip().replace("", 0).astype(int)
-    )
+    df_problem_numbers = df_problems_T_R.sum(axis=1).str.strip().replace("", 0).astype(int)
 
     def columnmath(s):
         if s.iloc[0, -1] == "*":

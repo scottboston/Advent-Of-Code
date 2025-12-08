@@ -31,10 +31,7 @@ def part1(step=2):
             check_r = s[0] - step
             check_c_left = s[1] - 1
             check_c_right = s[1] + 1
-            min_r = max(
-                (arr[: s[0], s[1]] != "^")[::-1].cumsum()
-                * (arr[: s[0], s[1]] != "^")[::-1].cumprod()
-            )
+            min_r = max((arr[: s[0], s[1]] != "^")[::-1].cumsum() * (arr[: s[0], s[1]] != "^")[::-1].cumprod())
             if (
                 check_r >= 0
                 and all(arr[s[0] : s[0] - min_r : -1, check_c_left] == ".")

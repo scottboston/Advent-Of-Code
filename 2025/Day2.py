@@ -34,9 +34,9 @@ def part2():
                 repeat_greedy = repeat_greedy[0]
             # print(repeat)
             try:
-                if str(i).count(repeat_no_greed) * len(repeat_no_greed) == len(
-                    str(i)
-                ) or str(i).count(repeat_greedy) * len(repeat_greedy) == len(str(i)):
+                if str(i).count(repeat_no_greed) * len(repeat_no_greed) == len(str(i)) or str(i).count(
+                    repeat_greedy
+                ) * len(repeat_greedy) == len(str(i)):
                     # print(i)
                     total += i
             except Exception as e:
