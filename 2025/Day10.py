@@ -1,6 +1,7 @@
 import aoc_utils.myconfig as utils
 from itertools import chain, combinations
-
+import numpy as np
+from scipy.optimize import milp, LinearConstraint, Bounds
 
 def powerset(iterable):
     "powerset([1,2,3]) --> () (1,) (2,) (3,) (1,2) (1,3) (2,3) (1,2,3)"
@@ -42,6 +43,30 @@ def part1():
         sum_presses += find_min_presses(lights, buttons)
     return sum_presses
 
+def part2():
+    total_button_presses = 0
+    for line in input_text.splitlines():
+        lights, *buttons, energy = line.split()
+        lights = lights[1:-1]
+        lights = [True if bulb == "#" else False for bulb in lights]
+        buttons = [list(map(int, button[1:-1].split(","))) for button in buttons]
+        energy = np.array(list(map(int, energy[1:-1].split(","))))
+        a = np.zeros((len(lights), len(buttons)), dtype=int)
+        for i, indices in enumerate(buttons):
+            for index in indices:
+                a[index, i] = 1
+
+        c = np.ones(len(buttons))
+        bounds = Bounds(0, np.inf)
+        constraints = LinearConstraint(a, lb=energy, ub=energy)
+
+        integrality = np.ones(len(buttons))
+        res = milp(c=c, constraints=constraints, bounds=bounds, integrality=integrality)
+
+        total_button_presses += sum(res.x)
+    return total_button_presses
+
 
 if __name__ == "__main__":
-    print(f"Part 1: {part1()}")
+    # print(f"Part 1: {part1()}")
+    print(f"Part 2: {part2()}")
