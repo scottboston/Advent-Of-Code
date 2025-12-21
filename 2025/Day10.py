@@ -64,9 +64,9 @@ def part2():
         res = milp(c=c, constraints=constraints, bounds=bounds, integrality=integrality)
 
         total_button_presses += sum(res.x)
-    return total_button_presses
+    return int(total_button_presses)
 
 
 if __name__ == "__main__":
-    # print(f"Part 1: {part1()}")
+    print(f"Part 1: {part1()}")
     print(f"Part 2: {part2()}")
