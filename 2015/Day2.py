@@ -10,7 +10,9 @@ def part1():
     total = 0
     for line in input_data.splitlines():
         dims = list(map(int, re.findall(r"\d+", line)))
-        total += sum(prod(i) * 2 for i in combinations(dims, 2)) + min(prod(i) for i in combinations(dims, 2))
+        total += sum(prod(i) * 2 for i in combinations(dims, 2)) + min(
+            prod(i) for i in combinations(dims, 2)
+        )
     return total
 
 
