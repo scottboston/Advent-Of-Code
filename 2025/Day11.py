@@ -45,6 +45,7 @@ def part1():
     paths = nx.all_simple_paths(G, "you", "out")
     return len(list(paths))
 
+
 def part1a():
     def parse_moves(input_data):
         dd = defaultdict(list)
@@ -59,6 +60,7 @@ def part1a():
         if start == end:
             return 1
         return sum(sum_paths(n, end, dd) for n in dd[start])
+
     return sum_paths("you", "out", parse_moves(input_data))
 
 
@@ -67,8 +69,8 @@ def part2():
     dd = {}
 
     for l in input_data.splitlines():
-        key, moves = l.split(': ')
-        dd[key] = moves.split(' ')
+        key, moves = l.split(": ")
+        dd[key] = moves.split(" ")
 
     @cache
     def sum_paths(start, finish, required):
@@ -79,7 +81,9 @@ def part2():
             new_required = required - {start}
             total += sum_paths(mid, finish, new_required)
         return total
-    return sum_paths('svr', 'out', frozenset({'dac', 'fft'}))
+
+    return sum_paths("svr", "out", frozenset({"dac", "fft"}))
+
 
 if __name__ == "__main__":
     print(f"Part 1: {part1()}")
