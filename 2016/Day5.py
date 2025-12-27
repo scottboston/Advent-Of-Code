@@ -22,9 +22,7 @@ def part2(seed="abc"):
         if h.startswith("00000"):
             try:
                 if int(h[5]) < 8:
-                    password[int(h[5])] = (
-                        h[6] if password[int(h[5])] == " " else password[int(h[5])]
-                    )
+                    password[int(h[5])] = h[6] if password[int(h[5])] == " " else password[int(h[5])]
             except Exception as e:
                 pass
         i += 1

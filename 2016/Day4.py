@@ -20,9 +20,7 @@ def part1():
             [(c, enc_room.count(c)) for c in set(sorted(enc_room.strip())) if c != "-"],
             key=lambda x: -x[1] * 100 + ord(x[0]),
         )[:5]
-        real_room += (
-            int(room_id) if all(i[x][0] == checksum[x] for x in range(5)) else 0
-        )
+        real_room += int(room_id) if all(i[x][0] == checksum[x] for x in range(5)) else 0
     return real_room
 
 
@@ -40,13 +38,7 @@ def part2():
         if all(i[x][0] == checksum[x] for x in range(5)):
             room = "".join(
                 [
-                    (
-                        ascii_lowercase[
-                            (ascii_lowercase.find(c) + int(room_id) % 26) % 26
-                        ]
-                        if c != "-"
-                        else " "
-                    )
+                    (ascii_lowercase[(ascii_lowercase.find(c) + int(room_id) % 26) % 26] if c != "-" else " ")
                     for c in enc_room
                 ]
             )
