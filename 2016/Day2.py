@@ -26,14 +26,20 @@ def part1():
         code.append(str(arr[y, x]))
     return "".join(code)
 
+
 def part2():
     input_data = utils.get_data(year=2016, day=2)
 
-    arr = np.array([[np.nan, np.nan, 1, np.nan, np.nan],
-                    [np.nan, 2, 3, 4, np.nan],
-                    [5, 6, 7, 8, 9],
-                    [np.nan, 'A', 'B', 'C', np.nan],
-                    [np.nan, np.nan, 'D', np.nan, np.nan]], dtype=object)
+    arr = np.array(
+        [
+            [np.nan, np.nan, 1, np.nan, np.nan],
+            [np.nan, 2, 3, 4, np.nan],
+            [5, 6, 7, 8, 9],
+            [np.nan, "A", "B", "C", np.nan],
+            [np.nan, np.nan, "D", np.nan, np.nan],
+        ],
+        dtype=object,
+    )
 
     d = {"U": 0 - 1j, "D": 0 + 1j, "R": 1 + 0j, "L": -1 + 0j}
     code = []
@@ -44,8 +50,13 @@ def part2():
             # print(c, nextp, d.get(c))
             newp = newp + d.get(c)
             try:
-                if newp.real < 0 or newp.real > 4 or newp.imag < 0 or newp.imag > 4\
-                        or np.isnan(arr[int(newp.imag), int(newp.real)]):
+                if (
+                    newp.real < 0
+                    or newp.real > 4
+                    or newp.imag < 0
+                    or newp.imag > 4
+                    or np.isnan(arr[int(newp.imag), int(newp.real)])
+                ):
                     newp = nextp
                     continue
             except Exception as e:
