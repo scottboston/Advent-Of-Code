@@ -12,6 +12,7 @@ input_data = """0,9 -> 5,9
 
 input_data = utils.get_data(2021, 5)
 
+
 def part1():
     dd = {}
     for line in input_data.splitlines():
@@ -27,14 +28,15 @@ def part1():
             dd[(cy, cx)] = 1
         # print(y1, x1, y2, x2, dy, dx)
         while (cy != y2) or (cx != x2):
-            cy += 1*np.sign(dy) if dy != 0 else 0
-            cx += 1*np.sign(dx) if dx != 0 else 0
+            cy += 1 * np.sign(dy) if dy != 0 else 0
+            cx += 1 * np.sign(dx) if dx != 0 else 0
             # print(cy, cx)
             if (cy, cx) in dd:
                 dd[(cy, cx)] += 1
             else:
                 dd[(cy, cx)] = 1
-    return sum(v>=2 for v in dd.values())
+    return sum(v >= 2 for v in dd.values())
+
 
 def part2():
     dd = {}
@@ -56,6 +58,7 @@ def part2():
             else:
                 dd[(cy, cx)] = 1
     return sum(v >= 2 for v in dd.values())
+
 
 if __name__ == "__main__":
     print(f"Part1 = {part1()}")
